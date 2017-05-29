@@ -7,6 +7,7 @@ setwd('~/GitHub/finalWageProject')
 wage.df <- read.csv('data/annualsalary.csv', stringsAsFactors = FALSE)
 
 shinyServer(function(input, output) { 
+
   # output$GraphName <- renderPlotly({
   #   #process information here
   #   return(plot_ly(
