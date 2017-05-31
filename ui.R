@@ -16,13 +16,17 @@ shinyUI(navbarPage('Washington Department Wages',
             sidebarPanel(
               textInput(inputId = "person", label = h3("See a WA employee's salary!"), value = "Person's first & last name only")
             ),
-            mainPanel(plotlyOutput("findPerson"))
+            mainPanel(
+              plotlyOutput("findPerson"),
+              br(),
+              br(),
+              tags$a(href="http://fiscal.wa.gov/WaStEmployeeHistSalary.txt", "Data Source"))
           )
  ),
  
   tabPanel("Department Wages",
            sidebarPanel(
-             checkboxGroupInput("checkGroup", 
+             checkboxGroupInput("selectDepts", 
                                 label = h3("Choose the Departments"), 
                                 choices = depts,
                                 selected = 125)
@@ -32,8 +36,6 @@ shinyUI(navbarPage('Washington Department Wages',
              #plots the department wise average wage comparison over the years
              plotlyOutput("dept"),
              br(),
-             br(),
-            
              br(),
              tags$a(href="http://fiscal.wa.gov/WaStEmployeeHistSalary.txt", "Data Source")
            )
