@@ -1,32 +1,42 @@
 library(shiny)
 library(plotly)
+library(dplyr)
 
-shinyUI(navbarPage('FinalProjectName',
-  # tabPanel('TabName',
-  #   titlePanel('TitleBelowTab'),
-  #   mainPanel(p(paste0("TabDescription")))
-  # ),
+wage.df <- read.csv('data/annualsalary.csv', stringsAsFactors = FALSE)
 
-  # #Copy the following code as a template---------------
-  # tabPanel('GraphDescriptionInTabName',
-  # titlePanel('TitleOfGraph'),
-  # sidebarLayout(
-  #   #Sidebar controls go here
-  #   sidebarPanel(),
-  #   #Generate graph here (change according to name, type of gaph you want)
-  #   mainPanel(plotlyOutput("GraphName"))
-  # )),
-  # #End of copy----------------------------------------                   
+vals <- unique(wage.df$Agency_Title)
+depts <- seq(1:137)
+names(depts) <- vals
+depts <- as.list(depts)
 
-  #Loads a plotly graph for the given person's salary from 2011 to 2015
-  tabPanel('WA Employee wage',
-   sidebarLayout(
-     sidebarPanel(
-       textInput(inputId = "person", label = h3("See a WA employee's salary!"), value = "Person's first & last name only")
-     ),
-     mainPanel(plotlyOutput("findPerson"))
-   )
-   )
-
+shinyUI(navbarPage('Washington Department Wages',
+ #Loads a plotly graph for the given person's salary from 2011 to 2015
+ tabPanel('WA Employee wage',
+          sidebarLayout(
+            sidebarPanel(
+              textInput(inputId = "person", label = h3("See a WA employee's salary!"), value = "Person's first & last name only")
+            ),
+            mainPanel(plotlyOutput("findPerson"))
+          )
+ ),
+ 
+  tabPanel("Department Wages",
+           sidebarPanel(
+             checkboxGroupInput("checkGroup", 
+                                label = h3("Choose the Departments"), 
+                                choices = depts,
+                                selected = 125)
+           ),
+           
+           mainPanel(
+             #plots the department wise average wage comparison over the years
+             plotlyOutput("dept"),
+             br(),
+             br(),
+            
+             br(),
+             tags$a(href="http://fiscal.wa.gov/WaStEmployeeHistSalary.txt", "Data Source")
+           )
+  )
     
 ))

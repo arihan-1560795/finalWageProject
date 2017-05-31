@@ -3,8 +3,9 @@ library(plotly)
 library(shiny)
 library(stringr)
 
-setwd('~/GitHub/finalWageProject')
 wage.df <- read.csv('data/annualsalary.csv', stringsAsFactors = FALSE)
+
+source("scripts/Department_Wages.R")
 
 shinyServer(function(input, output) { 
 
@@ -66,6 +67,12 @@ shinyServer(function(input, output) {
       yaxis = list(title = "Salary in USD"), 
       xaxis = list(title = "Years")
     ))
+  })
+  
+  output$dept <- renderPlotly({ 
+    
+    Department_Wages(input$checkGroup)
+    
   })
 })
 
