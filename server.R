@@ -3,19 +3,20 @@ library(plotly)
 library(shiny)
 library(stringr)
 
-wage.df <- read.csv('data/annualsalary.csv', stringsAsFactors = FALSE)
-
 source("scripts/Department_Wages.R")
 
-shinyServer(function(input, output) { 
+wage.df <- read.csv('data/annualsalary.csv', stringsAsFactors = FALSE)
 
-  # output$GraphName <- renderPlotly({
-  #   #process information here
-  #   return(plot_ly(
-  #     #Graph data here (data = a, x = b, ...)
-  #   ))
-  # })
-  
+colnames(wage.df)[7] <- "Sal2014"
+
+clean.commas <- function(column) {
+  as.numeric(gsub(",","",column))
+}
+
+wage.df[5:8] <- lapply(wage.df[5:8], clean.commas)
+
+
+shinyServer(function(input, output) { 
 
   #findPerson prints a plotLy scatterplot for the given peron's salary for the 4 years of data that 
   #the government has made available. 
@@ -36,16 +37,10 @@ shinyServer(function(input, output) {
     #Assumes no extra initials are given (only first and last name)
     person.df <- wage.df[sapply(strsplit(wage.df$employee_name, split=", "), function(str) all(name.vec %in% str)), ]
     
-    #Converts string salaries into numeric ones
-    person.df$Sal2012 <- as.numeric(gsub(",","",person.df$Sal2012))
-    person.df$Sal2013 <- as.numeric(gsub(",","",person.df$Sal2013))
-    person.df$Sal20141 <- as.numeric(gsub(",","",person.df$Sal20141))
-    person.df$Sal2015 <- as.numeric(gsub(",","",person.df$Sal2015))
-    
     #Creates a dataframe with only the years and their corresponding salary information
     #If more than one row was present, the salaries for that given year are summed
     years <- c('2012', '2013', '2014', '2015')
-    salary <- c(sum(person.df$Sal2012), sum(person.df$Sal2013), sum(person.df$Sal20141), sum(person.df$Sal2015))
+    salary <- c(sum(person.df$Sal2012), sum(person.df$Sal2013), sum(person.df$Sal2014), sum(person.df$Sal2015))
     ys.df <- data.frame(years, salary)
     
     #Prepares formatted strings for the person's name, the posts they've held, and the agency they've worked under
@@ -71,7 +66,7 @@ shinyServer(function(input, output) {
   
   output$dept <- renderPlotly({ 
     
-    Department_Wages(input$checkGroup)
+    Department_Wages(wage.df, input$checkGroup)
     
   })
 })
