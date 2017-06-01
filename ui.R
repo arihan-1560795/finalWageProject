@@ -12,8 +12,6 @@ depts <- as.list(depts)
 shinyUI(navbarPage('Washington Department Wages', theme = "bootstrap.css",
  # Loads a plotly graph for the given person's salary from 2011 to 2015
  tabPanel('Home',
-          sidebarLayout(
-            sidebarPanel(),
             mainPanel(
               h1("Intended Audience", align = "center"),
               p("This is meant for an audience who is interested in the salaries of Washington employees paid by the state. 
@@ -51,7 +49,6 @@ shinyUI(navbarPage('Washington Department Wages', theme = "bootstrap.css",
               br(),
               p("You can find our project's code on ", tags$a(href="https://github.com/arihan-1560795/finalWageProject", "Git Hub."))
             )
-          )
  ),
  
  tabPanel('WA State Employee Wages',
