@@ -10,13 +10,17 @@ names(depts) <- vals
 depts <- as.list(depts)
 
 shinyUI(navbarPage('Washington Department Wages', theme = "bootstrap.css",
- # Loads a plotly graph for the given person's salary from 2011 to 2015
+ # Prints out introduction of project on Home tab
  tabPanel('Home',
             mainPanel(
+              
+              # This prints out information about the intended audience
               h1("Intended Audience", align = "center"),
               p("This is meant for an audience who is interested in the salaries of Washington employees paid by the state. 
                 It can be useful to compare the salaries from each department and help point out trends/patterns."),
               br(),
+              
+              # This prints out information about the dataset
               h1("The Data", align = "center"),
               h2("Who?", style = "color:navy"),
               p("The dataset itself displays over 10,000 salaries for most employees who began working for the state of 
@@ -40,6 +44,8 @@ shinyUI(navbarPage('Washington Department Wages', theme = "bootstrap.css",
               p("This data set could answer questions about Washington State salaries so the viewer can see and compare different 
                 departments and the respective total calendar year earnings."),
               br(),
+              
+              # This prints out the project authors
               h1("Project Authors", align = "center"),
               tags$ul(
                 tags$li("Arihan Jalan", align = "center"), 
@@ -47,6 +53,8 @@ shinyUI(navbarPage('Washington Department Wages', theme = "bootstrap.css",
                 tags$li("Madeleine Prak", align = "center")
               ),
               br(),
+              
+              # This prints out where to find the code on GitHub
               p("You can find our project's code on ", tags$a(href="https://github.com/arihan-1560795/finalWageProject", "Git Hub."))
             )
  ),
@@ -57,6 +65,7 @@ shinyUI(navbarPage('Washington Department Wages', theme = "bootstrap.css",
               textInput(inputId = "person", label = h3("View a WA State Employee's Salary"), value = "First and Last Name")
             ),
             mainPanel(
+              # Plots the yearly salaries of a specific employee
               plotlyOutput("findPerson"),
               br(),
               p("This graph can be used to search any person's name employed by Washington State and see their yearly salary 
@@ -77,7 +86,7 @@ shinyUI(navbarPage('Washington Department Wages', theme = "bootstrap.css",
            ),
            
            mainPanel(
-             # lots the department wise average wage comparison over the years
+             # Plots the department wise average wage comparison over the years
              plotlyOutput("dept"),
              p("This graph can be used to view any specific department's total average wages. You can select multiple departments 
                to compare the wages and to pick out trends of the data. One can see which department has a higher/lower average 
