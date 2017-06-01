@@ -23,7 +23,7 @@ shinyUI(navbarPage('Washington Department Wages', theme = "bootstrap.css",
               # This prints out information about the dataset
               h1("The Data", align = "center"),
               h2("Who?", style = "color:navy"),
-              p("The dataset itself displays over 10,000 salaries for most employees who began working for the state of 
+              p("The dataset itself displays over 340,000 salaries for most employees who began working for the state of 
                 Washington January 1, 2010 or after and earned more than $300 during the calendar year. This does not include 
                 anyone new to the state government of the current calendar year or student employees because it is protected 
                 by federal regulation and is not public information. However it does reflect the earnings of those who have 
