@@ -72,6 +72,11 @@ shinyUI(navbarPage('Washington Department Wages', theme = "bootstrap.css",
                 throughout their working history. One can see that typically, an individual's salary increases the longer 
                 they work.", align = "center"),
               br(),
+              h4("Insight"),
+              p("Mike Leach, the Head Football Coach at Washington State University, has the highest paid salary by the state in 
+                Washington of $2,850,000 in 2015. For 2012, 2013, and 2014, the highest paid salary by the state also belongs to a Head 
+                Football Coach. This may be explained by how college athletes don't get paid to play. This portrays how big of a role 
+                sports plays in our country and is surprising to see in numbers."),
               br(),
               tags$a(href="http://fiscal.wa.gov/WaStEmployeeHistSalary.txt", "Data Source"))
           )
@@ -92,6 +97,11 @@ shinyUI(navbarPage('Washington Department Wages', theme = "bootstrap.css",
                to compare the wages and to pick out trends of the data. One can see which department has a higher/lower average 
                salary.", align = "center"),
              br(),
+             h4("Insight"),
+             p("Choosing the University of Washington and Washington State University helps show the contrast between the two average
+               salaries from the two schools. The University of Washington clearly has a higher average. Though, there are some key factors
+               that could explain the difference. They both are in different locations--UW in the West and WSU in the East--which both have
+               different costs of living including different minimum wages. This could influence the difference of the two average salaries."),
              br(),
              tags$a(href="http://fiscal.wa.gov/WaStEmployeeHistSalary.txt", "Data Source")
            )
